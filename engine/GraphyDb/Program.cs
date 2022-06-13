@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 namespace GraphyDb
@@ -8,7 +9,7 @@ namespace GraphyDb
     {
         private static void Main(string[] args)
         {
-            using (var engine = new DbEngine())
+            using (var engine = new DbEngine(ConfigurationManager.AppSettings["dbPath"]))
             {
 //                engine.DropDatabase();
 

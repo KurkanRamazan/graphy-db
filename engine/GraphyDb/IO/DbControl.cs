@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -22,9 +21,8 @@ namespace GraphyDb.IO
         internal const string StringPath = "string.storage.db";
 
         internal const string IdStoragePath = "id.storage";
-        internal static readonly string DbPath = ConfigurationManager.AppSettings["dbPath"];
         private static bool initializedIOFlag = false;
-
+        
         internal static readonly Dictionary<string, int> BlockByteSize = new Dictionary<string, int>()
         {
             {StringPath, 34},
@@ -78,7 +76,7 @@ namespace GraphyDb.IO
         /// <summary>
         /// Create storage files if missing
         /// </summary>
-        public static void InitializeIO()
+        public static void InitializeIO(string DbPath)
         {
             if (initializedIOFlag) return;
             try
@@ -87,7 +85,7 @@ namespace GraphyDb.IO
 
                 foreach (var filePath in DbControl.DbFilePaths)
                 {
-                    FileStreamDictionary[filePath] = new FileStream(Path.Combine(DbControl.DbPath, filePath),
+                    FileStreamDictionary[filePath] = new FileStream(Path.Combine(DbPath, filePath),
                         FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite, 5 * 1024 * 1024);
                 }
 
@@ -165,10 +163,10 @@ namespace GraphyDb.IO
             initializedIOFlag = false;
         }
 
-        public static void DeleteDbFiles()
+        public static void DeleteDbFiles(string filePath)
         {
             ShutdownIO();            
-            Directory.Delete(DbPath, true);
+            Directory.Delete(filePath, true);
         }
 
         public static int AllocateId(string filePath)

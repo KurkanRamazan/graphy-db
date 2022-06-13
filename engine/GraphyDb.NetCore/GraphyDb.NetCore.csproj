@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\GraphyDb\*.cs" Link="%(Filename)%(Extension)" Exclude="..\GraphyDb\Program.cs" />
+    <Compile Include="..\GraphyDb\IO\*.cs" Link="IO\%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ZeroFormatter" Version="1.6.4" />
+    <PackageReference Include="ZeroFormatter.Interfaces" Version="1.6.4" />
+  </ItemGroup>
+</Project>

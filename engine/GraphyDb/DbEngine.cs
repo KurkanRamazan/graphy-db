@@ -8,11 +8,13 @@ namespace GraphyDb
     public class DbEngine: IDisposable
     {
         public List<Entity> ChangedEntities;
+        private readonly string dbPath;
 
-        public DbEngine()
+        public DbEngine(string dbPath)
         {
-            DbControl.InitializeIO();
+            DbControl.InitializeIO(dbPath);
             ChangedEntities = new List<Entity>();
+            this.dbPath = dbPath;
         }
 
         public Node AddNode(string label)
@@ -31,8 +33,9 @@ namespace GraphyDb
             entity.Db.ChangedEntities.Add(entity);
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
+            var count = ChangedEntities.Distinct().Count();
             foreach (var entity in ChangedEntities.Distinct())
             {
                 var entityType = entity.GetType();
@@ -351,11 +354,12 @@ namespace GraphyDb
             }
 
             ChangedEntities.Clear();
+            return count;
         }
 
         public void DropDatabase()
         {
-            DbControl.DeleteDbFiles();
+            DbControl.DeleteDbFiles(dbPath);
         }
 
         public void Dispose()
