@@ -14,11 +14,12 @@ namespace GraphyDbTests
         /// Used for Thread.Sleep due to eventual consistency properties of the database
         /// </summary>
         private const int ConsistencyDelayMs = 0;
+        private const string dbPath = "/db-tests";
 
         [TestInitialize]
         public void DropDatabase()
         {
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
             engine.DropDatabase();
         }
 
@@ -26,7 +27,7 @@ namespace GraphyDbTests
         public void Match_Node_By_Label()
         {
             const string Label = "Primitive";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             engine.AddNode(Label);
             engine.SaveChanges();
@@ -42,7 +43,7 @@ namespace GraphyDbTests
         public void Match_Two_Nodes_By_Label()
         {
             const string Label = "Primitive";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             engine.AddNode(Label);
             engine.AddNode(Label);
@@ -61,7 +62,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "PropertyName";
             const string PropertyValue = "value";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -84,7 +85,7 @@ namespace GraphyDbTests
             const string Property1Value = "value";
             const string Property2Name = "PropertyName1";
             const string Property2Value = "value";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[Property1Name] = Property1Value;
@@ -109,7 +110,7 @@ namespace GraphyDbTests
             const string RelationLabel = "x";
             const string PropertyName = "PropName";
             const string PropertyValue = "PropValue";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node1 = engine.AddNode(Node1Label);
             var node2 = engine.AddNode(Node2Label);
@@ -138,7 +139,7 @@ namespace GraphyDbTests
             const string Node1Label = "aaa";
             const string Node2Label = "bbb";
             const string RelationLabel = "x";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node1 = engine.AddNode(Node1Label);
             var node2 = engine.AddNode(Node2Label);
@@ -162,7 +163,7 @@ namespace GraphyDbTests
             const string Node3Label = "ccc";
             const string RelationLabel = "x";
             const string RelationLabel1 = "y";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node1 = engine.AddNode(Node1Label);
             var node2 = engine.AddNode(Node2Label);
@@ -190,7 +191,7 @@ namespace GraphyDbTests
             const string Node1Label = "aaa";
             const string Node2Label = "bbb";
             const string RelationLabel = "x";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node1 = engine.AddNode(Node1Label);
             var node2 = engine.AddNode(Node2Label);
@@ -214,7 +215,7 @@ namespace GraphyDbTests
             const string Node3Label = "ccc";
             const string RelationLabel = "x";
             const string RelationLabel1 = "y";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node1 = engine.AddNode(Node1Label);
             var node2 = engine.AddNode(Node2Label);

@@ -14,11 +14,11 @@ namespace GraphyDbTests
         /// Used for Thread.Sleep due to eventual consistency properties of the database
         /// </summary>
         private const int ConsistencyDelayMs = 0;
-
+        private const string dbPath = "/db-tests";
         [TestInitialize]
         public void DropDatabase()
         {
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
             engine.DropDatabase();
         }
 
@@ -27,7 +27,7 @@ namespace GraphyDbTests
         public void Add_Node()
         {
             const string Label = "Primitive";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             engine.AddNode(Label);
             engine.SaveChanges();
@@ -43,7 +43,7 @@ namespace GraphyDbTests
         public void Delete_Node()
         {
             const string Label = "Primitive";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             engine.SaveChanges();
@@ -64,7 +64,7 @@ namespace GraphyDbTests
             const string RelationLabel = "Left";
             const string FromNodeLabel = "Primitive";
             const string ToNodeLabel = "Primitive1";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var nodeFrom = engine.AddNode(FromNodeLabel);
             var nodeTo = engine.AddNode(ToNodeLabel);
@@ -91,7 +91,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "StringProperty";
             const string PropertyValue = "some value";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -110,7 +110,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "FloatProperty";
             const float PropertyValue = 5.01f;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -129,7 +129,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "IntProperty";
             const int PropertyValue = 5;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -148,7 +148,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "BooleanProperty";
             const bool PropertyValue = true;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -168,7 +168,7 @@ namespace GraphyDbTests
             const string PropertyName = "IntProperty";
             const int PropertyValueBefore = 1;
             const int PropertyValueAfter = 5;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValueBefore;
@@ -189,7 +189,7 @@ namespace GraphyDbTests
             const string PropertyName = "FloatProperty";
             const float PropertyValueBefore = 1.21f;
             const float PropertyValueAfter = 5.21f;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValueBefore;
@@ -210,7 +210,7 @@ namespace GraphyDbTests
             const string PropertyName = "FloatProperty";
             const string PropertyValueBefore = "before";
             const string PropertyValueAfter = "after";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValueBefore;
@@ -231,7 +231,7 @@ namespace GraphyDbTests
             const string PropertyName = "FloatProperty";
             const bool PropertyValueBefore = true;
             const bool PropertyValueAfter = false;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValueBefore;
@@ -251,7 +251,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "StringProperty";
             const string PropertyValue = "some value";
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -271,7 +271,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "FloatProperty";
             const float PropertyValue = 1.21f;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -291,7 +291,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "IntProperty";
             const int PropertyValue = 5;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
@@ -311,7 +311,7 @@ namespace GraphyDbTests
             const string Label = "Primitive";
             const string PropertyName = "BoolProperty";
             const bool PropertyValue = true;
-            var engine = new DbEngine();
+            var engine = new DbEngine(dbPath);
 
             var node = engine.AddNode(Label);
             node[PropertyName] = PropertyValue;
